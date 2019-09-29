@@ -1,0 +1,62 @@
+<h1>Currency Converter</h1>
+<p>Select input currency</p>
+<div>
+    <input type="radio" id="USD" name="drone" value="USD" checked />
+    <label for="USD">USD</label>
+</div>
+<div>
+    <input type="radio" id="EUR" name="drone" value="EUR" />
+    <label for="EUR">EUR</label>
+</div>
+<input type="text" id="amount" />
+<button onclick="convertToVnd()">Converter currency</button>
+<span id="result"></span>
+
+<script>
+    var resultApi = {};
+    var conversionUSD = 0;
+    var conversionEUR = 0;
+
+    function convertToVnd() {
+        callApi();
+    }
+
+    function callApi() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.exchangerate-api.com/v4/latest/VND');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                updateResults(JSON.parse(xhr.responseText));
+            } else {
+                alert('Request failed. Returned status of ' + xhr.status);
+            }
+
+        };
+        xhr.send();
+    }
+
+    function updateResults(response) {
+
+        rates = response.rates;
+        conversionUSD = Math.floor(1 / rates["USD"]);
+        conversionEUR = Math.floor(1 / rates["EUR"]);
+
+        var radios = document.getElementsByName("drone");
+        for (i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) { //callApi(radios[i].value);
+                let value = radios[i].value;
+                if (value == "USD") {
+                    conversion = conversionUSD;
+                } else if (value == "EUR") {
+                    conversion = conversionEUR;
+                }
+
+                break;
+            }
+        }
+        let input = document.getElementById("amount").value;
+        let vndAmount = input * conversion;
+        document.getElementById("result").innerHTML = vndAmount;
+
+    }
+</script>
