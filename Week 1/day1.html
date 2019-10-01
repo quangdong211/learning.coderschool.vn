@@ -9,13 +9,11 @@
 <h3 id="pass">Pass text</h3>
 <script>
     var currentNumber = Math.floor(Math.random() * 10);
-    console.log('currentNumber', currentNumber);
     var count = 10;
     var passText = "";
 
     function testFunction() {
         const inputNumber = document.getElementById("number").value;
-        console.log('inputNumber', inputNumber);
         passText += inputNumber + '</br>';
         document.getElementById("pass").innerHTML = passText;
         if (inputNumber == currentNumber) {
