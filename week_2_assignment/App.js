@@ -11,7 +11,7 @@ import {
 const { width } = Dimensions.get('window');
 import Constants from 'expo-constants';
 // You can import from local files
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
 
 const imgData = [
   { id: 1, imgSource: require('./assets/1.jpg') },
@@ -23,21 +23,35 @@ const imgData = [
 ];
 
 export default class App extends React.Component {
+
+  _onBack = () => {
+    alert('Back');
+  }
+  _onMore = () => {
+    alert('More');
+  }
+  _onFollow = () => {
+    alert('Follow');
+  }
+  _onSend = () => {
+    alert('Send');
+  }
+
   _keyExtractor = item => item.id;
   _renderItem = ({ item, index }) => {
     return (
-      <Image
-        style={{
-          width: width / 2 - 20,
-          height: width / 2 - 20,
-          borderRadius: 10,
-          margin: 5,
-          // marginLeft: 5,
-          // marginRight: index % 2 == 0 ? 5 : 0,
-        }}
-        source={item.imgSource}
-        resizeMethod={'auto'}
-      />
+      <TouchableOpacity>
+        <Image
+          style={{
+            width: width / 2 - 20,
+            height: width / 2 - 20,
+            borderRadius: 10,
+            margin: 5,
+          }}
+          source={item.imgSource}
+          resizeMethod={'auto'}
+        />
+      </TouchableOpacity>
     );
   };
 
@@ -45,24 +59,18 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            height: 44,
-            paddingTop: Constants.statusBarHeight,
-          }}>
-          <TouchableOpacity>
-            <Ionicons name="md-arrow-round-back" size={27} color="#6A779F" />
+          style={styles.viewHeader}>
+          <TouchableOpacity onPress={this._onBack}>
+            <Ionicons name="md-arrow-round-back" size={24} color="#6A779F" />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <MaterialIcons name="fullscreen" size={27} color="#6A779F" />
+          <TouchableOpacity onPress={this._onMore}>
+            <AntDesign name="appstore1" size={24} color="#6A779F" />
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
           <Image
             source={require('./assets/avatar.jpg')}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
+            style={styles.avatar}
             resizeMode="cover"
           />
           <View style={{ marginLeft: 10 }}>
@@ -75,32 +83,24 @@ export default class App extends React.Component {
             </View>
 
             <View style={[styles.row]}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this._onFollow}>
                 <View
-                  style={{
-                    height: 30,
-                    borderRadius: 20,
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                  style={[styles.button, {
                     backgroundColor: '#3C72FF',
                     paddingHorizontal: 30,
-                  }}>
+                  }]}>
                   <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     {'Follow'}
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this._onSend}>
                 <View
-                  style={{
-                    width: 50,
-                    height: 30,
-                    borderRadius: 20,
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                  style={[styles.button, {
                     backgroundColor: '#56D8FE',
+                    paddingHorizontal: 20,
                     marginLeft: 10,
-                  }}>
+                  }]}>
                   <Ionicons name="md-send" size={24} color="white" />
                 </View>
               </TouchableOpacity>
@@ -110,7 +110,7 @@ export default class App extends React.Component {
         <View
           style={[
             styles.row,
-            { justifyContent: 'space-between', marginVertical: 20 },
+            { justifyContent: 'space-between', marginTop: 20, marginBottom: 20 }
           ]}>
           <View style={styles.viewFollow}>
             <Text style={styles.number}>{'535'}</Text>
@@ -142,10 +142,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     paddingHorizontal: 13,
   },
+  viewHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 44,
+    paddingTop: Constants.statusBarHeight,
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50
+  },
+  button: {
+    height: 30,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   body: {
     flex: 1,
   },
   row: {
+    marginTop: 5,
     flexDirection: 'row',
   },
   number: {
