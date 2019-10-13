@@ -91,7 +91,7 @@ class App extends React.Component {
 
     var won = this.state.won;
     var lose = this.state.lose;
-    var tied = this.state.lied;
+    var tied = this.state.tied;
     if (result == 'Victory!') {
       won = won + 1;
     }
@@ -120,14 +120,29 @@ class App extends React.Component {
   };
 
   render() {
+    var wonPercent = 0,
+      losePercent = 0,
+      tiedPercent = 0;
+    if (this.state.playedTotal > 0) {
+      wonPercent = Math.floor((this.state.won / this.state.playedTotal) * 100);
+      losePercent = Math.floor((this.state.lose / this.state.playedTotal) * 100);
+      tiedPercent = 100 - (wonPercent + losePercent);
+    }
+
     return (
       <View style={styles.container}>
+        <Text style={styles.vsStyle}>
+          {'Played Total: ' + this.state.playedTotal}
+        </Text>
         <View style={styles.playedTotal}>
+          <Text style={[styles.vsStyle, { color: 'green' }]}>
+            {`Won: ${this.state.won} (${wonPercent} %)`}
+          </Text>
+          <Text style={[styles.vsStyle, { color: 'red' }]}>
+            {` Lose: ${this.state.lose} (${losePercent} %)`}
+          </Text>
           <Text style={styles.vsStyle}>
-            {'Played Total: ' +
-              this.state.playedTotal +
-              ' Won:' +
-              this.state.won}
+            {` Tied: ${this.state.tied} (${tiedPercent} %)`}
           </Text>
         </View>
         <Text
