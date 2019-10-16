@@ -1,0 +1,7 @@
+@media print {
+    @page{ size:auto; margin:5mm; }
+    a.anchor, div.action-bar, .section-action { display:none; }
+    .glyphicon { display:none; }
+    a[href]:after { content:"" !important; }
+    .panel { border: 0; }
+}
