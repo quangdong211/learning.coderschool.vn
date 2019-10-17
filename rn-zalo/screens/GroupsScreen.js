@@ -1,14 +1,16 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
 
-export default function SettingsScreen() {
+export default class GroupsScreen extends React.Component {
   /**
    * Go ahead and delete ExpoConfigView and replace it with your content;
    * we just wanted to give you a quick view of your config.
    */
-  return <ExpoConfigView />;
+  render() {
+    return <ExpoConfigView />;
+  }
 }
 
-SettingsScreen.navigationOptions = {
+GroupsScreen.navigationOptions = {
   title: 'app.json',
 };
