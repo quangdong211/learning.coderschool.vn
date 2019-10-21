@@ -112,7 +112,6 @@ export default class AllScreen extends React.Component {
                   />
                 );
               })}
-
               <View style={styles.inputContainer}>
                 <TextInput
                   value={todoBody}
