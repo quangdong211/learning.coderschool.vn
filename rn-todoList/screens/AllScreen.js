@@ -93,6 +93,7 @@ export default class AllScreen extends React.Component {
     return (
       <ImageBackground
         style={styles.scrollView}
+        resizeMethod={"auto"}
         source={require('../assets/images/imageBackground2.png')}>
         <KeyboardAvoidingView
           enabled

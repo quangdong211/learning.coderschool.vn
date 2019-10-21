@@ -92,44 +92,43 @@ export default class ActiveScreen extends React.Component {
 
     const { todoList, todoBody } = this.state;
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.scrollView}
-          source={require('../assets/images/iphone11_2.png')}>
-          <KeyboardAvoidingView
-            enabled
-            behavior="padding"
-            style={styles.scrollView}>
-            <ScrollView style={styles.scrollView}>
-              <View style={styles.container}>
+      <ImageBackground
+        style={styles.scrollView}
+        resizeMethod={"auto"}
+        source={require('../assets/images/iphone11_2.png')}>
+        <KeyboardAvoidingView
+          enabled
+          behavior="padding"
+          style={styles.scrollView}>
+          <ScrollView style={styles.scrollView}>
+            <View style={styles.container}>
 
-                {todoList.map((todo, idx) => {
-                  return (
-                    <TodoItem
-                      key={idx}
-                      idx={idx}
-                      todo={todo}
-                      onLongPress={this.onLongPress}
-                      onToggleTodo={this.onToggleTodo}
-                    />
-                  );
-                })}
-                <View style={styles.inputContainer}>
-                  <TextInput
-                    value={todoBody}
-                    style={styles.todoInput}
-                    onChangeText={text => this.setState({ todoBody: text })}
+              {todoList.map((todo, idx) => {
+                return (
+                  <TodoItem
+                    key={idx}
+                    idx={idx}
+                    todo={todo}
+                    onLongPress={this.onLongPress}
+                    onToggleTodo={this.onToggleTodo}
                   />
-                  <TouchableOpacity style={styles.button}
-                    onPress={this.onSubmitTodo}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                  </TouchableOpacity>
-                </View>
+                );
+              })}
+              <View style={styles.inputContainer}>
+                <TextInput
+                  value={todoBody}
+                  style={styles.todoInput}
+                  onChangeText={text => this.setState({ todoBody: text })}
+                />
+                <TouchableOpacity style={styles.button}
+                  onPress={this.onSubmitTodo}>
+                  <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
               </View>
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </ImageBackground>
-      </View>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     );
   }
 }
