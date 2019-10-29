@@ -57,6 +57,7 @@ export default class App extends React.Component {
 
         this.listRoot = newArticleList;
         this.setState({
+          articles: newArticleList,
           pageNumber: pageNumber + 1
         }, () => this.onFilterData);
       } else {
@@ -74,20 +75,20 @@ export default class App extends React.Component {
 
 
   onFilterData = () => {
-    var { keyWord } = this.state;
+    // var { keyWord } = this.state;
 
-    var article = this.listRoot;
-    if (keyWord) {
-      article = this.listRoot.filter(item => {
-        var { source } = item;
-        if (source.name == keyWord) {
-          return true;
-        }
-        return false;
-      })
-    }
+    // var articles = this.listRoot;
+    // if (keyWord) {
+    //   articles = this.listRoot.filter(item => {
+    //     var { source } = item;
+    //     if (source.name == keyWord) {
+    //       return true;
+    //     }
+    //     return false;
+    //   })
+    // }
 
-    this.setState({ article: article })
+    // this.setState({ articles: articles })
   }
 
   filterForUniqueArticles = arr => {
